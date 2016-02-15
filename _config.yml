@@ -1,0 +1,44 @@
+name: Marcin Jałbrzykowski | Blog
+description: O inżynierii oprogramowania słów kilka
+meta_description: "O inżynierii oprogramowania słów kilka"
+
+gems: [jekyll-paginate, pygments]
+
+aboutPage: true
+
+markdown: redcarpet
+highlighter: pygments
+
+paginate: 20
+baseurl: /
+domain_name: 'http://jalbrzykowski.net'
+google_analytics: 'UA-XXXXXXXX-X'
+disqus: true
+disqus_shortname: 'jalbrzykowski'
+
+# Details for the RSS feed generator
+url:            'http://jalbrzykowski.net'
+author:         'Marcin Jałbrzykowski'
+authorTwitter:  'jalbrzym'
+
+permalink:       /:year/:month/:title/
+
+defaults:
+    -
+        scope:
+            path: "" # empty string for all files
+            type: pages
+        values:
+            layout: default
+    -
+        scope:
+            path: "" # empty string for all files
+            type: posts
+        values:
+            layout: post
+    -
+        scope:
+            path: ""
+            type: drafts
+        values:
+            layout: post
