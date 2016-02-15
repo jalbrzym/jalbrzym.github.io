@@ -12,7 +12,7 @@ highlighter: pygments
 paginate: 20
 baseurl: /
 domain_name: 'http://jalbrzykowski.net'
-google_analytics: 'UA-XXXXXXXX-X'
+google_analytics: 'UA-68667707-1'
 disqus: true
 disqus_shortname: 'jalbrzykowski'
 
