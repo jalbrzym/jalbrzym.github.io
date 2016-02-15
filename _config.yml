@@ -2,12 +2,12 @@ name: Marcin Jałbrzykowski | Blog
 description: O inżynierii oprogramowania słów kilka
 meta_description: "O inżynierii oprogramowania słów kilka"
 
-gems: [jekyll-paginate, pygments]
+gems: [jekyll-paginate, rouge]
 
 aboutPage: true
 
 markdown: redcarpet
-highlighter: pygments
+highlighter: rouge
 
 paginate: 20
 baseurl: /
