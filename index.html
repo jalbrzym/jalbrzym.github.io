@@ -1,0 +1,31 @@
+---
+layout: default
+---
+
+{% for post in paginator.posts %}
+  <article>
+    <header>
+      <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+      <p class="article-date">
+        <span>{{ post.date | date: "%d %B %Y, %H:%m" }}</span>
+      </p>
+    </header>
+    <div class="article-content">
+      {{ post.content }}
+    </div>
+  </article>
+{% endfor %}
+
+<ul class="pager">
+  {% if paginator.previous_page %}
+    <li class="previous"><a href="{{ paginator.previous_page_path }}">Previous</a></li>
+  {% else %}
+    <li class="previous"><span>Previous</span></li>
+  {% endif %}
+  <li class="page_number "><span>Page: {{ paginator.page }} of {{ paginator.total_pages }}</span></li>
+  {% if paginator.next_page %}
+    <li class="next"><a href="{{ paginator.next_page_path }}">Next</a></li>
+  {% else %}
+    <li class="next"><span>Next</span></li>
+  {% endif %}
+</ul>
