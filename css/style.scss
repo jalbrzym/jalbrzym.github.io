@@ -1,0 +1,55 @@
+---
+---
+.sidebar-outer {
+    position: relative;
+} 
+@media (min-width: 768px) {
+    .sidebar {
+        position: fixed;
+        top: 50px;
+    }
+ 
+    .content {
+        padding-top: 32px;
+    }
+}
+@media (max-width: 767px) {
+    .sidebar {
+        margin: 25px 0;
+    }
+}
+
+.social-icons {
+    margin-top: 10px;
+}
+
+.social-icons i.fa {
+    margin: 5px 10px;
+}
+
+i.fa:hover {
+    transition: 0.9s;
+    transform: scale(1.5);
+}
+
+i.fa:after {
+    transition: 0.9s;
+    transform: scale(1);
+}
+
+article {  
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+body {
+    font-size: 14px;
+}
+
+.article-content {
+    padding-top: 5px;
+}
+
+.article-date {
+    font-style: italic;
+}   
