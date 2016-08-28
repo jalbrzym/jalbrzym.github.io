@@ -2,6 +2,7 @@ title: "Marcin Jałbrzykowski - Beyond code & evil"
 description: "My personal thoughts about software engineering"
 baseurl: ""
 url: "http://jalbrzykowski.net"
+future: true
 
 gems: [ "jekyll-paginate", "jekyll-sass-converter" ]
 markdown: kramdown
