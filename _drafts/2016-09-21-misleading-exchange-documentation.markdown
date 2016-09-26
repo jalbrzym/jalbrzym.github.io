@@ -13,7 +13,7 @@ A few weeks ago I had the opportunity to work with on-premise Exchange Server 20
 
 Everything seemed to work fine. Meeting request was sent correctly and all participants received it. Unexpectedly, when I tried to accept or decline meeting request, I've got an error message: 
 
-
+ 
 `The action couldn't be completed. A conflicting change was made to the item on the server`.
 
 ### Problem investigation
@@ -41,7 +41,7 @@ The author of documentation had 1 out of 1000 probability for getting current ti
 ### Lessons learned
 
 * If you write a documentation, please check twice that all of sample code snippets work correctly and get **expected**, **repeatable** results. Put a disclaimer whenever on some conditions examples may fail.
-* It is important to be vigilant if you work with a documentation of a new or unfamiliar technology. Write integration tests which cover basic use cases and edge cases. Such tests can prove correctness of a documentation. Furthermore, 
+* It is important to be vigilant if you work with a documentation of a new or unfamiliar technology. Write integration tests which cover basic use cases and edge cases. Such tests can prove correctness of a manual. Furthermore, one day your external API provider can make change in webservice functionality or you can update library to the newest version. Those tests will help you quickly detect unexpected breaking changes in technologies used by your application.
 * I encourage you to share solutions of such problems on the internet. You have nothing to loose, but you can save a lot of hours of other developers which encounter similar problem.
 * Exchange Server, for some reason, doesn't like overly punctual people. Bear in mind that Exchange accept time accurate to the second. You have to round milliseconds to nearest second, unless Exchange may behave strange.
 
