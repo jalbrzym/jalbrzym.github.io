@@ -14,6 +14,7 @@ A few weeks ago I had the opportunity to work with on-premise Exchange Server 20
 My task was to save information about meeting entered by organizer and (after successfully validation and data persistence) to send meeting request to all attendees. The first part was quite simple - show a form, bind data and save into database.
 
 The second part of the task was more interesting. Before I started implementation I opened a EWS Managed API documentation and I found [how to create and send a meeting request](https://msdn.microsoft.com/en-us/library/office/dn495611(v=exchg.150).aspx#Anchor_2). The sample code looks so easy. It consists in three simple steps:
+
 * create an `Appointment` object represents a meeting
 * set meeting data using propper `Appointment` object's properties (start date, location, attendees, etc.)
 * call `Save` method of an `Appointment` object  
