@@ -1,19 +1,19 @@
 ---
 layout: post
-title:  "Misleading Exchange documentation"
-date:   2016-09-21 20:30:00 +0200
+title:  "Misleading documentation - Exchange meeting requests"
+date:   2016-10-02 23:30:00 +0200
 categories: 
 ---
 
 ### Hello Exchange!
 
-A few weeks ago I had the opportunity to work with on-premise Exchange Server 2013. Microsoft provides a powerful interface to manage Exchange mailboxes called EWS (Exchange Web Services). Unfortunately, communication between EWS and Exchange Server is based on heavy-weight SOAP messages. Instead of creating requests and parsing responses manually, I decided to use EWS Managed API v2.0. This is an open-source library, which wraps SOAP communication and provides API for .NET developers in more object-oriented manner. 
+A few weeks ago I had the opportunity to work with on-premise Exchange Server 2013. Microsoft provides a powerful interface to manage Exchange mailboxes called [EWS (Exchange Web Services)](https://msdn.microsoft.com/en-us/library/office/dd877012(v=exchg.150).aspx). Unfortunately, communication between EWS and Exchange Server is based on heavy-weight SOAP messages. Instead of creating requests and parsing responses manually, I decided to use [EWS Managed API](https://github.com/OfficeDev/ews-managed-api/blob/master/README.md). This is an open-source library, which wraps SOAP communication and provides API for .NET developers in more object-oriented manner. 
 
 ### Schedule a meeting
 
 My task was to save information about meeting entered by organizer and (after successfully validation and data persistence) to send meeting request to all attendees. The first part was quite simple - show a form, bind data and save into database.
 
-The second part of the task was more interesting. Before I started implementation I opened a EWS Managed API documentation and I found how to create and send a meeting request. The sample code looks so easy. It consists in three simple steps:
+The second part of the task was more interesting. Before I started implementation I opened a EWS Managed API documentation and I found [how to create and send a meeting request](https://msdn.microsoft.com/en-us/library/office/dn495611(v=exchg.150).aspx#Anchor_2). The sample code looks so easy. It consists in three simple steps:
 * create an `Appointment` object represents a meeting
 * set meeting data using propper `Appointment` object's properties (start date, location, attendees, etc.)
 * call `Save` method of an `Appointment` object  
@@ -37,6 +37,8 @@ Everything seemed to work fine. Meeting request was sent correctly and all parti
  
 `The action couldn't be completed. A conflicting change was made to the item on the server`.
 
+![My helpful screenshot]({{ site.url }}/assets/posts/2016-10-02-misleading-documentation/exchange-error.png)
+
 ### Problem investigation
 
 Firstly, I asked Google and Stack Overflow about this error. They said nothing - it didn't bode well. 
@@ -59,24 +61,16 @@ I looked at the documentation and I compared a body of the sample request from d
     &lt;t:End&gt;2013-09-21T20:00:00.000Z&lt;/t:End&gt;
     &lt;t:Location&gt;Conference Room 12&lt;/t:Location&gt;
     &lt;t:RequiredAttendees&gt;
-        &lt;t:Attendee&gt;
-            &lt;t:Mailbox&gt;
-                &lt;t:EmailAddress&gt;Jan.Kowalski@exchange.local&lt;/t:EmailAddress&gt;
-            &lt;/t:Mailbox&gt;
-        &lt;/t:Attendee&gt;
+        ...
     &lt;/t:RequiredAttendees&gt;
     &lt;t:OptionalAttendees&gt;
-        &lt;t:Attendee&gt;
-            &lt;t:Mailbox&gt;
-                &lt;t:EmailAddress&gt;Jan.Nowak@exchange.local&lt;/t:EmailAddress&gt;
-            &lt;/t:Mailbox&gt;
-        &lt;/t:Attendee&gt;
+        ...
     &lt;/t:OptionalAttendees&gt;
     &lt;t:MeetingTimeZone TimeZoneName="Pacific Standard Time" /&gt;
 &lt;/t:CalendarItem&gt;
 </code></pre>
 
-They were nearly identical except for the different time of start and end of the meeting. It's obvious that they were different, because in the sample code the start time is set by using current time (`DateTime.Now`). One thing was suspicious - the start and end time were set at full hour.
+They were nearly identical except for the different time of start and end of the meeting. It's obvious that they were different, because in the sample code the start time is set on current time (`DateTime.Now`). One thing was suspicious - the start and end time were set at full hour.
 
 I set the start and end time manually on the exact point in time and sent it. 
 
@@ -99,10 +93,7 @@ The author of documentation had 1 out of 1000 probability for getting current ti
 
 * If you write a documentation, please check twice that all of sample code snippets work correctly and get **expected**, **repeatable** results. Put a disclaimer whenever on some conditions examples may fail.
 * It is important to be vigilant if you work with a documentation of a new or unfamiliar technology. Write **integration tests** which cover basic use cases and edge cases. Such tests can prove correctness of a manual. Furthermore, one day your external API provider can make a change in a webservice functionality or you can update a library to the newest version. Those tests will help you quickly detect unexpected breaking changes in third-party technologies used by your application.
+* An error message should be **helpful in troubleshooting**. Show precise and well-formatted description of encountered problem. Furthermore, you can suggest steps to solve a problem. Avoid displaying meaningless (ex. "*An error has occured*") or misleading error messages, which could only increase frustration of your users.  
 * I encourage you to **share solutions** of such problems on the internet. You have nothing to loose, but you can save a lot of hours of other developers which will encounter similar problem.
 * Exchange Server, for some reason, doesn't like overly punctual people. Bear in mind that Exchange accept time accurate to the second. You have to **round milliseconds to the nearest second**, unless Exchange may behave strange.
-
-
-
-
 
